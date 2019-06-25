@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Aula 03 - Introdução ao Jquery</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <script>
+
+            $(document).ready( function(){
+
+                $('.sumir').click(function() {
+                  $('.informacoes').hide(500);  
+                });
+
+
+                $('.mostrar').click(function() {
+                  $('.informacoes').show(500);  
+                });
+
+                $('.esconder').click(function() {
+                  $('.informacoes').hide(500);  
+                });
+
+            });
+        </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Introdução ao Jquery</h1>
+
+        
+        <button class="btn btn-primary sumir" >Aba1 </button>
+        <button class="btn btn-primary sumir" >Aba2 </button>
+        <button class="btn btn-primary sumir" >Aba3 </button>
+
+        <button class="btn btn-warning mostrar" >Mostrar Todos </button>
+        <button class="btn btn-danger esconder" >Esconder Todos </button>
+
+        <br> 
+
+        <div class="informacoes">
+            Adriel Carlos Dias
+        </div>
+        
+        <div class="informacoes">
+            adrielcarlos1010@gmail.com
+        </div>
+
+        <div class="informacoes">
+            Programador
+        </div>
+ 
+
+    </div>
+
+
+</body>
+
+</html>
