@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--Exercicio 01-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>lampada</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style media="screen">
+      .pequena{
+        width:200px;
+        height: 130px;
+      }
+      .grande{
+        width:800px;
+        height:520px;
+      }
+    </style>
+  </head>
+    <!--Corpo-->
+  <body>
+      
+    <div id="002" class="galeria container-fluid" >
+      <div class="col-md-12">
+
+      <img id="sp" class="grande" src="https://i.pinimg.com/originals/de/f6/96/def69643889ee29e232637646e839064.jpg" alt="grande">
+    </div>
+
+    <div class="col-md-6">
+
+        <img id="1" class="pequena" id="velhos"src="https://i.pinimg.com/originals/de/f6/96/def69643889ee29e232637646e839064.jpg" alt="idosos">
+        <img id="2" class="pequena" id="tempestades"src="https://jovemnerd.com.br/wp-content/uploads/2019/03/sonic-filme-760x428.jpg" alt="tempestades">
+        <img id="3" class="pequena" id="batma"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3PxKO-0Ruz2aWG77Ls0oqbynMivNc96KEJjX36M6_Yzmi5rfW" alt="bolo do batman">
+    </div>
+    <div class="col-md-12">
+        <button id="ant" class="btn btn-light" type="button" name="anterior">&lsaquo;-- Anterior</button>
+        <button id="pro" class="btn btn-light" type="button" name="proximo">Proximo --&rsaquo;</button>
+    </div>
+    </div>
+
+
+    
+
+  </body>
+
+  <!--JQuery-->
+  <script type="text/javascript">
+  valor = 0;
+ 
+ //funcao das imagens
+ $(document).ready(function () {
+        $(".pequena").click(function () {
+          var src = $(this).attr('src');
+          $(".grande").attr("src", src);
+        });
+        var count = 1;
+        $("#pro").click(function (){
+
+            if(count>=1 && count <=2){
+              count++;
+            } else if(count ==3){
+              count = 1;
+            }
+
+          trocaImagem();
+        });
+        $("#ant").click(function (){
+
+            if(count>=2 && count <=3){
+              count--;
+            } else if(count ==1){
+              count = 3;
+            }
+
+          trocaImagem();
+        });
+        function trocaImagem(){
+          switch (count){
+          case 1:
+            var src = $("#1").attr('src');
+            $(".grande").attr("src", src);
+            break;
+          case 2:
+            var src = $("#2").attr('src');
+            $(".grande").attr("src", src);
+            break;
+          case 3:
+            var src = $("#3").attr('src');
+            $(".grande").attr("src", src);
+            break;
+        }
+      };
+
+      var countDiv = 0;
+      $("#afrente").click(function (){
+        switch (countDiv) {
+          case 0:
+            countDiv++;
+            $("#11").hide();
+            $("#12").show();
+            break;
+          case 1:
+            countDiv++;
+            $("#12").hide();
+            $("#13").show();
+            break;
+          case 2:
+            $("#13").hide();
+            $("#11").show();
+            countDiv = 0;
+            break;
+          default:
+        };
+      });
+      $("#atras").click(function (){
+        switch (countDiv) {
+          case 0:
+            countDiv = 2;
+            $("#11").attr("style","display:none");
+            $("#13").show();
+            break;
+          case 1:
+            countDiv--;
+            $("#12").hide();
+            $("#11").show();
+            break;
+          case 2:
+            countDiv--;
+            $("#13").hide();
+            $("#12").show();
+            break;
+          default:
+        };
+      });
+
+    
+
+});
+
+
+
+  </script>
+</html>

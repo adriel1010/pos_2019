@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--Exercicio 01-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>lampada</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style media="screen">
+      .pequena{
+        width:200px;
+        height: 130px;
+      }
+      .grande{
+        width:800px;
+        height:520px;
+      }
+    </style>
+  </head>
+    <!--Corpo-->
+  <body>
+   
+  
+    <div id="003" class="container" >
+
+
+      <div id="11" style="">
+        
+
+            <img id="sp"   src="https://i.pinimg.com/originals/de/f6/96/def69643889ee29e232637646e839064.jpg" alt="grande">
+
+            <p>
+
+O que é Lorem Ipsum?
+
+Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.
+
+            </p>
+
+      </div>
+
+
+      <div id="12" style="display:none">
+        
+        <p>
+                Onde posso conseguí-lo?
+
+Existem muitas variações disponíveis de passagens de Lorem Ipsum, mas a maioria sofreu algum tipo de alteração, seja por inserção de passagens com humor, ou palavras aleatórias que não parecem nem um pouco convincentes. Se você pretende usar uma passagem de Lorem Ipsum, precisa ter certeza de que não há algo embaraçoso escrito escondido no meio do texto. Todos os geradores de Lorem Ipsum na internet tendem a repetir pedaços predefinidos conforme necessário, fazendo deste o primeiro gerador de Lorem Ipsum autêntico da internet. Ele usa um dicionário com mais de 200 palavras em Latim combinado com um punhado de modelos de estrutura de frases para gerar um Lorem Ipsum com aparência raz
+        </p>
+
+        <img id="sp"   src="https://jovemnerd.com.br/wp-content/uploads/2019/03/sonic-filme-760x428.jpg" alt="grande">
+
+      </div>
+
+
+      <div id="13" style="display:none">
+        
+            
+            <p>
+                    Passagem padrão original de Lorem Ipsum, usada desde o século XVI.
+
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </p>
+
+            <img id="sp"   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEDN6FLnTw1qPOf5AhkMbq8usbpKJ_9sIB5sOVjm-dugcvIjk" alt="grande">
+
+            <p>
+                    Passagem padrão original de Lorem Ipsum, usada desde o século XVI.
+
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </p>
+
+
+
+      </div>
+
+
+
+      <button id="atras" type="button" class="btn btn-light" name="anterior">&lsaquo;-- Anterior</button>
+      <button id="afrente" type="button" class="btn btn-light" name="proximo">Proximo --&rsaquo;</button>
+    </div>
+
+
+  </body>
+
+  <!--JQuery-->
+  <script type="text/javascript">
+  valor = 0;
+ 
+ //funcao das imagens
+ $(document).ready(function () {
+         
+      var countDiv = 0;
+      $("#afrente").click(function (){
+        switch (countDiv) {
+          case 0:
+            countDiv++;
+            $("#11").hide();
+            $("#12").show();
+            break;
+          case 1:
+            countDiv++;
+            $("#12").hide();
+            $("#13").show();
+            break;
+          case 2:
+            $("#13").hide();
+            $("#11").show();
+            countDiv = 0;
+            break;
+          default:
+        };
+      });
+      $("#atras").click(function (){
+        switch (countDiv) {
+          case 0:
+            countDiv = 2;
+            $("#11").attr("style","display:none");
+            $("#13").show();
+            break;
+          case 1:
+            countDiv--;
+            $("#12").hide();
+            $("#11").show();
+            break;
+          case 2:
+            countDiv--;
+            $("#13").hide();
+            $("#12").show();
+            break;
+          default:
+        };
+      });
+
+    
+
+});
+
+
+
+  </script>
+</html>
