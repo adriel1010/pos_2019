@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atividade 1</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <script src="js/jquery-3.4.1.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#estudante').hide();
+            $('#professor').hide();
+
+            $('select').change(function () {
+                var valor = $(this).val();
+                if (valor == 'professor') {
+                    $('#estudante').hide();
+                    $('#professor').show();
+                } else {
+                    $('#estudante').show();
+                    $('#professor').hide();
+                }
+            });
+
+            $('button').click(function (event) {
+
+                var nome = $("#nome").val();
+                var email = $("#email").val();
+                var select = $("select").val();
+
+                var numero = '';
+                if (select == 'professor') {
+                    numero = $('#siape').val();
+                    numero += ' (SIAPE)'
+                } else {
+                    numero = $('#ra').val();
+                    numero += ' (RA)'
+                }
+
+                $("tbody").append(` 
+                  <tr>
+                    <td>${nome}</td> 
+                    <td>${email}</td> 
+                    <td>${numero}</td>   
+                  </tr>`);
+
+                var nome = $("#nome").val('');
+                var email = $("#email").val('');
+                var nome = $("#ra").val('');
+                var email = $("#siape").val('');
+                var senha = $("#senha").val('');
+
+                $('#estudante').hide();
+                $('#professor').hide();
+
+
+
+
+                event.preventDefault();
+
+
+            });
+
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form action="" method="post">
+
+            <label for="">Nome: </label>
+            <input id="nome" class="form-control" type="text" name="">
+            <br>
+
+            <label for="">E-mail: </label>
+            <input id="email" class="form-control" type="email">
+            <br>
+
+            <label for="">Profissão: </label>
+            <select class="form-control" id="select" name="">
+                <option value="selecione">Selecione</option>
+                <option value="estudante">Estudante</option>
+                <option value="professor">Professor</option>
+            </select>
+            <br>
+
+            <div id="estudante">
+                <label for="">Ra: </label>
+                <input id="ra" class="form-control" type="email">
+                <br>
+
+                <label for="">Senha: </label>
+                <input class="form-control" type="password">
+                <br>
+            </div>
+
+            <div id="professor">
+                <label for="">Siape: </label>
+                <input id="siape" class="form-control" type="email">
+                <br>
+
+                <label for="">Data Ingresso: </label>
+                <input class="form-control" type="date">
+                <br>
+
+                <label for="">Senha: </label>
+                <input id="senha" class="form-control" type="password">
+                <br>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <br>
+
+
+        </form>
+
+
+
+        <table class="table mt-5">
+
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Profissão</th>
+                    <th>Nº</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+
+</body>
+
+</html>
