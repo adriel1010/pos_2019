@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aula04</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script>
+        //quando o documento estiver pronto
+        $(document).ready(function(){
+ 
+            $('#perfil_pessoal').hide();
+            $('#ultima_pagina').hide(); 
+            $('.mensagem').hide();
+            $('.escondeTabela').hide();
+
+            $('#formacao_academica').click(function() {
+                $('#perfil_pessoal').show();
+                $('#ultima_pagina').hide(); 
+                $('#primeira_pagina').hide();
+            })
+
+            $('#dados_pessoais').click(function() {
+                $('#perfil_pessoal').hide();
+                $('#ultima_pagina').hide(); 
+                $('#primeira_pagina').show();
+            })
+
+            $('#perfil').click(function() {
+                $('#perfil_pessoal').hide();
+                $('#ultima_pagina').show(); 
+                $('#primeira_pagina').hide();
+            })
+
+            var counter = true;                
+
+            $("form").submit(function (evento) {
+                jQuery('.mensagem').empty();
+                counter = true;
+                $(".obrigatorio").each(function () { 
+                    if ( $(this).val() == "" ) {  
+                       counter = false;
+
+                        var id = jQuery(this).attr('id'); 
+                        $('.mensagem').show();  
+                         $( ".mensagem" ).append("<div class='alert alert-danger'>  O campo " + id + ' é obrigatório' + '</di>');
+                         $(this).next("span").text("Este campo é obrigatório.");
+
+                    } else {
+                     $(this).next("span").text(""); 
+                    }
+ 
+                });
+
+                var senha = $("input[name=senha]").val();
+                var senha_rep = $("input[name=rep_senha]").val();
+
+
+                if(senha != senha_rep || senha == ''){
+                    counter = false;
+                    jQuery('.mensagem').empty();
+                    $('.mensagem').show(); 
+                    $(".mensagem" ).append("<div class='alert alert-danger'>  As senhas são diferentes! </di>");
+                    //leva o cursor ao input "Repetir Senha" 
+                    //adiciona a borda vermelha "danger"
+                    $("input[name=rep_senha]").addClass("border-danger");
+                    $("input[name=senha]").addClass("border-danger");
+                } else{
+                    counter = true;
+                    //Remove a classe "border-danger" se estiver setada na tag
+                    $("input[name=rep_senha]").removeClass("border-danger");
+                    $("input[name=senha]").removeClass("border-danger");
+                } 
+   
+                if (counter) { 
+                    $('.escondeTabela').show(); 
+                    $("tbody").append(` 
+                    <tr>
+                    <td>${$('#Nome').val()}</td> 
+                    <td>${$('#cidade').val()}</td> 
+                    <td>${$('#email').val()}</td>   
+                    </tr>`); 
+
+                    }  
+
+                    evento.preventDefault();
+ 
+            });
+
+            $("#cep").blur(function (event) {
+
+                var keycode = (event.keyCode ? event.keyCode : event.which);  
+                var cep = $(this).val();  
+                var url = "https://viacep.com.br/ws/"+cep+"/json/?callback=?"; 
+                $.getJSON(url, "", function(resp, status){
+               
+                $('#rua').val(resp.logradouro);
+                $('#bairro').val(resp.bairro);
+                $('#cidade').val(resp.localidade);
+                $('#estado').val(resp.uf);
+ 
+                }); 
+                });
+                
+ 
+
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="dados_pessoais" data-toggle="tab" href="#primeira_pagina" role="tab" aria-controls="primeira_pagina" aria-selected="true">Dados pessoais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="formacao_academica" data-toggle="tab" href="#perfil_pessoal" role="tab" aria-controls="perfil_pessoal" aria-selected="false">Formação acadêmica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="perfil" data-toggle="tab" href="#ultima_pagina" role="tab" aria-controls="ultima_pagina" aria-selected="false">Dados Profissionais</a>
+                </li>
+                </ul>
+                
+            </div>
+        </div>
+        
+        <div class="row">
+            <!--mx-auto centraliza os componentes da linha x ou horizontal-->
+ 
+
+            <div class="col-md-12 mx-auto">
+
+                <div id='mensagem' class="mensagem">
+                     
+                </div>
+
+                    <div class="tab-content" id="myTabContent">
+
+                <form method="post">
+
+                    <div id="primeira_pagina"> 
+
+                        <label for="Nome">Nome: </label>
+                        <input id="Nome" class="form-control obrigatorio" type="text" name=""> 
+                        <span class="text-danger"></span>
+                        <br>
+
+                        <label for="Documentos">Documentos: </label>
+                        <input id="Documentos" class="form-control obrigatorio" type="text">
+                        <span class="text-danger"></span>
+                        <br>
+
+                        <label for="">CEP: </label>
+                        <input id="cep" class="form-control" type="text"> 
+                        <br> 
+
+                        <label for="">Rua: </label>
+                        <input id="rua" class="form-control" type="text"> 
+                        <br> 
+
+                        <label for="">Bairro: </label>
+                        <input id="bairro" class="form-control" type="text"> 
+                        <br> 
+  
+                        <label for="">Cidade: </label>
+                        <input id="cidade" class="form-control" type="text"> 
+                        <br> 
+
+                        <label for="">Estado: </label>
+                        <input id="estado" class="form-control" type="text"> 
+                        <br> 
+
+                    </div>
+
+                    <div id="perfil_pessoal" > 
+
+                        <label id="Curso" for="">Curso Superior: </label>
+                        <input id="Curso" class="form-control obrigatorio" type="text">
+                        <span class="text-danger"></span>
+                        <br>
+
+                        <label id="Local" for="">Local: </label>
+                        <input id="Local" class="form-control obrigatorio" type="text">
+                        <span class="text-danger"></span>
+                        <br>
+
+                        <label for="">Data Conclusão: </label>
+                        <input class="form-control" type="date"> 
+                        <br> 
+
+                    </div>
+
+
+                    <div id="ultima_pagina" > 
+
+                            <label id="Data_Entrada"  for="">Data Entrada: </label>
+                            <input id="Data_Entrada"  class="form-control obrigatorio" type="date">
+                            <span class="text-danger"></span>
+                            <br>
+
+                            <label id="Data_Saída" for="">Data Saída: </label>
+                            <input  id="Data_Saída" class="form-control obrigatorio" type="date">
+                            <span class="text-danger"></span>
+                            <br>
+    
+    
+                            <label for="">Função: </label>
+                            <input class="form-control" type="text"> 
+                            <br>
+
+                            <label for="">Empresa: </label>
+                            <input class="form-control" type="text"> 
+                            <br> 
+
+                            <label for="">Email: </label>
+                            <input id="email" class="form-control" type="email"> 
+                            <br> 
+
+                            <label for="">Senha: </label> 
+                            <input id="senha" class="form-control" name="senha" type="password"> 
+                            <br>
+    
+                            <label for="">Repetir Senha: </label>
+                            <input id="rep_senha"class="form-control" name="rep_senha" type="password">  
+                            <br>
+    
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>  
+                            <br>
+    
+ 
+                    </div> 
+                </form>
+
+                <div class="escondeTabela">
+                <table class="table mt-5">
+
+                    <thead>
+                        <tr>
+                            <th>nome</th>
+                            <th>cidade</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        
+                    </tbody>
+                </table>
+            </div>
+              </div>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>
